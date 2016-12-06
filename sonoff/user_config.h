@@ -18,15 +18,15 @@
 #define SAVE_STATE             1            // [SaveState] Save changed power state to Flash (0 = disable, 1 = enable)
 
 // -- Wifi -----------------------------------
-#define STA_SSID1              "indebuurt2"      // [Ssid] Wifi SSID
-#define STA_PASS1              "VnsqrtnrsddbrN"  // [Password] Wifi password
-#define STA_SSID2              "indebuurt3"      // [Ssid2] Optional alternate AP Wifi SSID
-#define STA_PASS2              "VnsqrtnrsddbrN"  // [Password2] Optional alternate AP Wifi password 
+#define STA_SSID1              ""      // [Ssid] Wifi SSID
+#define STA_PASS1              ""  // [Password] Wifi password
+#define STA_SSID2              ""      // [Ssid2] Optional alternate AP Wifi SSID
+#define STA_PASS2              ""  // [Password2] Optional alternate AP Wifi password 
 #define WIFI_HOSTNAME          "%s-%04d"         // [Hostname] Expands to <MQTT_TOPIC>-<last 4 decimal chars of MAC address>
 #define WIFI_CONFIG_TOOL       WIFI_WPSCONFIG    // [WifiConfig] Default tool if wifi fails to connect (WIFI_RESTART, WIFI_SMARTCONFIG, WIFI_MANAGER or WIFI_WPSCONFIG)
 
 // -- Syslog ---------------------------------
-#define SYS_LOG_HOST           "domus1"        // [LogHost] (Linux) syslog host
+#define SYS_LOG_HOST           "zeus"        // [LogHost] (Linux) syslog host
 #define SYS_LOG_PORT           514             // [LogPort] default syslog UDP port
 #define SYS_LOG_LEVEL          LOG_LEVEL_NONE  // [SysLog]
 #define SERIAL_LOG_LEVEL       LOG_LEVEL_INFO  // [SerialLog]
@@ -34,9 +34,9 @@
 
 // -- Ota ------------------------------------
 #if (ARDUINO >= 168)
-  #define OTA_URL              "http://domus1:80/api/arduino/" PROJECT ".ino.bin"  // [OtaUrl]
+  #define OTA_URL              "http://grigori:80/api/arduino/" PROJECT ".ino.bin"  // [OtaUrl]
 #else
-  #define OTA_URL              "http://domus1:80/api/arduino/" PROJECT ".cpp.bin"  // [OtaUrl]
+  #define OTA_URL              "http://grigori:80/api/arduino/" PROJECT ".cpp.bin"  // [OtaUrl]
 #endif
 
 // -- MQTT -----------------------------------
@@ -50,20 +50,20 @@
   #define MQTT_USER            "cloudmqttuser"      // [MqttUser] Mandatory user
   #define MQTT_PASS            "cloudmqttpassword"  // [MqttPassword] Mandatory password
 #else
-  #define MQTT_HOST            "domus1"     // [MqttHost]
+  #define MQTT_HOST            "mqttbroker"     // [MqttHost]
   #define MQTT_PORT            1883         // [MqttPort] MQTT port (10123 on CloudMQTT)
-  #define MQTT_USER            "DVES_USER"  // [MqttUser] Optional user
-  #define MQTT_PASS            "DVES_PASS"  // [MqttPassword] Optional password
+  #define MQTT_USER            ""  // [MqttUser] Optional user
+  #define MQTT_PASS            ""  // [MqttPassword] Optional password
 #endif
 
-#define MQTT_CLIENT_ID         "DVES_%06X"  // [MqttClient] Also fall back topic using Chip Id = last 6 characters of MAC address
+#define MQTT_CLIENT_ID         "SONOFF_%06X"  // [MqttClient] Also fall back topic using Chip Id = last 6 characters of MAC address
 
-#define SUB_PREFIX             "cmnd"       // Sonoff devices subscribe to:- SUB_PREFIX/MQTT_TOPIC and SUB_PREFIX/MQTT_GRPTOPIC
-#define PUB_PREFIX             "stat"       // Sonoff devices publish to:- PUB_PREFIX/MQTT_TOPIC
-#define PUB_PREFIX2            "tele"       // Sonoff devices publish telemetry data to:- PUB_PREFIX2/MQTT_TOPIC/UPTIME, POWER/LIGHT and TIME
+#define SUB_PREFIX             "sonoff/cmnd"       // Sonoff devices subscribe to:- SUB_PREFIX/MQTT_TOPIC and SUB_PREFIX/MQTT_GRPTOPIC
+#define PUB_PREFIX             "sonoff/stat"       // Sonoff devices publish to:- PUB_PREFIX/MQTT_TOPIC
+#define PUB_PREFIX2            "sonoff/stat"       // Sonoff devices publish telemetry data to:- PUB_PREFIX2/MQTT_TOPIC/UPTIME, POWER/LIGHT and TIME
                                             //   May be named the same as PUB_PREFIX
 #define MQTT_TOPIC             PROJECT      // [Topic] (unique) MQTT device topic
-#define MQTT_BUTTON_RETAIN     0            // [ButtonRetain] Button may send retain flag (0 = off, 1 = on)
+#define MQTT_BUTTON_RETAIN     1            // [ButtonRetain] Button may send retain flag (0 = off, 1 = on)
 
 #define MESSAGE_FORMAT         LEGACY       // [MessageFormat] MQTT Message Format (LEGACY or JSON)
 #define MQTT_STATUS_ON         "ON"         // Status result when turned on (needs to be a string like "1" or "On")
@@ -91,9 +91,9 @@
   #define WEB_SERVER           2            // [WebServer] Web server (0 = Off, 1 = Start as User, 2 = Start as Admin)
 
 // -- Time - Up to three NTP servers in your region
-#define NTP_SERVER1            "pool.ntp.org"
-#define NTP_SERVER2            "nl.pool.ntp.org"
-#define NTP_SERVER3            "0.nl.pool.ntp.org"
+#define NTP_SERVER1            "0.uk.pool.ntp.org"
+#define NTP_SERVER2            "1.uk.pool.ntp.org"
+#define NTP_SERVER3            "2.uk.pool.ntp.org"
 
 // -- Time - Start Daylight Saving Time and timezone offset from UTC in minutes
 #define TIME_DST               Last, Sun, Mar, 2, +120  // Last sunday in march at 02:00 +120 minutes
@@ -102,7 +102,7 @@
 #define TIME_STD               Last, Sun, Oct, 3, +60   // Last sunday in october 02:00 +60 minutes
 
 // -- Application ----------------------------
-#define APP_TIMEZONE           1            // [Timezone] +1 hour (Amsterdam) (-12 .. 12 = hours from UTC, 99 = use TIME_DST/TIME_STD)
+#define APP_TIMEZONE           0            // [Timezone] +1 hour (Amsterdam) (-12 .. 12 = hours from UTC, 99 = use TIME_DST/TIME_STD)
 #define APP_LEDSTATE           1            // [LedState] Do not show power state (1 = Show power state)
 
 #define TEMP_RESOLUTION        1            // Maximum number of decimals (0 - 3) showing sensor Temperature
